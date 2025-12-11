@@ -55,14 +55,25 @@ jobs:
         # true:下载阶段打印出详细信息(待推送的优惠信息列表,过滤时使用的黑白词),因文本量比较大,在调通项目后可以改为false
         detail: false
       run: java -jar zdm.jar
-    # 保存已推送和暂未推送的优惠信息
-    - name: git add files
-      run: |
-        git add database.db
-    - name: commit & push
-      uses: actions-go/push@master
+    # # 保存已推送和暂未推送的优惠信息
+    # - name: git add files
+    #   run: |
+    #     git add database.db
+    # - name: commit & push
+    #   uses: actions-go/push@master
+    #   with:
+    #     author-email: 'actions@github.com'
+    #     author-name: 'GitHub Actions'
+    #     commit-message: 'update articles'
+    #     token: ${{secrets.GIT_TOKEN}}
+
+    - name: Commit & Push database.db
+      # 使用 stefanzweifel/git-auto-commit-action 来自动处理 add/commit/push
+      uses: stefanzweifel/git-auto-commit-action@v5
       with:
-        author-email: 'actions@github.com'
-        author-name: 'GitHub Actions'
-        commit-message: 'update articles'
-        token: ${{secrets.GIT_TOKEN}}
+        commit_message: 'update database'
+        # 明确指定只提交 database.db 文件
+        file_pattern: 'database.db' 
+        # 使用你已配置好的 GIT_TOKEN
+        token: ${{ secrets.GIT_TOKEN }}
+    
