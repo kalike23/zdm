@@ -47,7 +47,7 @@ jobs:
         # 邮箱smtp服务端口
         emailPort: 465
         # 接收优惠信息的邮箱 为空代表不进行邮箱推送
-        emailaccount: ${{ secrets.EMAILACCOUNT }}
+        emailAccount: ${{ secrets.EMAILACCOUNT }}
         # 接收优惠信息的邮箱的授权码 为空代表不进行邮箱推送
         emailPassword: ${{ secrets.EMAILPASSWORD }}
         # WxPusher极简推送模式的spt 为空代表不进行Wx推送
